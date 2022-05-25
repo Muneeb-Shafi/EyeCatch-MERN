@@ -23,14 +23,12 @@ const LoginScreen = ({ location, history }) => {
       history.push(redirect)
     }
   }, [history, userInfo, redirect])
-
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(login(email, password))
   }
-  var nodemailer = require('nodemailer');
-  var smtpTransport = require('nodemailer-smtp-transport');
-
+ 
+/*
   var transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
@@ -53,7 +51,7 @@ const LoginScreen = ({ location, history }) => {
     } else {
       console.log('Email sent: ' + info.response);
     }
-  });
+  });*/
 
   return (
     <FormContainer>
