@@ -28,6 +28,32 @@ const LoginScreen = ({ location, history }) => {
     e.preventDefault()
     dispatch(login(email, password))
   }
+  var nodemailer = require('nodemailer');
+  var smtpTransport = require('nodemailer-smtp-transport');
+
+  var transporter = nodemailer.createTransport(smtpTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    auth: {
+      user: 'eyecatchglasses@gmail.com',
+      pass: 'eyecatchadmin'
+    }
+  }));
+
+  var mailOptions = {
+    from: 'EyeCatch@Admin',
+    to: 'f190955@nu.edu.pk',
+    subject: 'Password Recovery',
+    text: 'We have Recieved a Recover Password request from this user, our tech team is validating the account. You will recieve the new password shortly'
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
 
   return (
     <FormContainer>
@@ -60,12 +86,18 @@ const LoginScreen = ({ location, history }) => {
         </Button>
       </Form>
 
+
+
       <Row className='py-3'>
         <Col>
           New Customer?{' '}
           <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
             Register
           </Link>
+        </Col>
+        <Col onclick="sayHello()">
+          Forgot Password?{' '}
+            Reset
         </Col>
       </Row>
     </FormContainer>
