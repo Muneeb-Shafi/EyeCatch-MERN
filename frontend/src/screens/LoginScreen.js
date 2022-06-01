@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
 import { login } from '../actions/userActions'
 
+
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -18,6 +19,9 @@ const LoginScreen = ({ location, history }) => {
 
   const redirect = location.search ? location.search.split('=')[1] : '/'
 
+  function sayHello() {
+    alert('Cant Reset Password, Go Create a new Account');
+  }
   useEffect(() => {
     if (userInfo) {
       history.push(redirect)
@@ -27,7 +31,6 @@ const LoginScreen = ({ location, history }) => {
     e.preventDefault()
     dispatch(login(email, password))
   }
- 
 /*
   var transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
@@ -93,9 +96,9 @@ const LoginScreen = ({ location, history }) => {
             Register
           </Link>
         </Col>
-        <Col onclick="sayHello()">
+        <Col >
           Forgot Password?{' '}
-            Reset
+            <Button type='submit' variant='primary'onClick={sayHello}>Reset </Button>
         </Col>
       </Row>
     </FormContainer>
@@ -103,3 +106,4 @@ const LoginScreen = ({ location, history }) => {
 }
 
 export default LoginScreen
+  
